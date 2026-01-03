@@ -52,32 +52,20 @@ const BentoGrid = () => {
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.1 }}
-                        className="md:col-span-1 row-span-2 rounded-3xl bg-surface border border-white/5 p-8 hover:border-white/10 transition-colors relative overflow-hidden group"
+                        className="md:col-span-1 row-span-2 rounded-3xl bg-surface border border-white/5 p-0 hover:border-white/10 transition-colors relative overflow-hidden group"
                     >
-                        <div className="absolute bottom-0 left-0 w-64 h-64 bg-purple-500/5 rounded-full blur-3xl -z-10 group-hover:bg-purple-500/10 transition-colors" />
+                        <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-blue-500/5" />
 
-                        <h3 className="text-xl font-semibold text-white mb-6 flex items-center gap-2">
-                            <Terminal size={20} className="text-gray-400" /> Stack
-                        </h3>
-
-                        <div className="flex flex-wrap gap-2">
-                            {["Python", "Django", "JavaScript", "React", "PostgreSQL", "Git", "Tailwind"].map(skill => (
-                                <span key={skill} className="px-3 py-1.5 rounded-lg bg-white/5 text-gray-300 text-sm border border-white/5 hover:border-white/20 hover:bg-white/10 transition-all cursor-default">
-                                    {skill}
-                                </span>
-                            ))}
+                        <div className="absolute top-6 left-6 z-10 pointer-events-none">
+                            <h3 className="text-xl font-semibold text-white/80 flex items-center gap-2">
+                                <Terminal size={20} /> Stack
+                            </h3>
                         </div>
 
-                        <div className="mt-8 space-y-4">
-                            <div className="flex items-center gap-3 text-gray-400">
-                                <Database size={16} /> <span>DB Schema Design</span>
-                            </div>
-                            <div className="flex items-center gap-3 text-gray-400">
-                                <Layout size={16} /> <span>Pixel Perfect UI</span>
-                            </div>
-                            <div className="flex items-center gap-3 text-gray-400">
-                                <Github size={16} /> <span>CI/CD Pipelines</span>
-                            </div>
+                        <div className="w-full h-full">
+                            <Suspense fallback={<div className="w-full h-full flex items-center justify-center text-white/10">Loading...</div>}>
+                                <GravitySkills />
+                            </Suspense>
                         </div>
                     </motion.div>
                     {/* Stat Block 1 */}

@@ -39,6 +39,7 @@ const GravitySkills = () => {
         const Runner = Matter.Runner;
 
         const engine = Engine.create();
+        engine.gravity.y = 0; // Zero gravity
         engineRef.current = engine;
 
         const width = sceneRef.current.clientWidth;
@@ -60,33 +61,44 @@ const GravitySkills = () => {
         // Scale bodies based on container width
         const scale = width < 500 ? 0.6 : 0.8;
 
-        const ground = Bodies.rectangle(width / 2, height + 20, width, 40, {
+        const wallOptions = {
             isStatic: true,
-            render: { fillStyle: "transparent" }
-        });
-        const wallLeft = Bodies.rectangle(-20, height / 2, 40, height, { isStatic: true, render: { fillStyle: "transparent" } });
-        const wallRight = Bodies.rectangle(width + 20, height / 2, 40, height, { isStatic: true, render: { fillStyle: "transparent" } });
+            render: { fillStyle: "transparent" },
+            restitution: 1 // Bouncy walls
+        };
 
-        World.add(engine.world, [ground, wallLeft, wallRight]);
+        const ground = Bodies.rectangle(width / 2, height + 20, width, 40, wallOptions);
+        const roof = Bodies.rectangle(width / 2, -20, width, 40, wallOptions);
+        const wallLeft = Bodies.rectangle(-20, height / 2, 40, height, wallOptions);
+        const wallRight = Bodies.rectangle(width + 20, height / 2, 40, height, wallOptions);
+
+        World.add(engine.world, [ground, roof, wallLeft, wallRight]);
 
         // Create random bodies
         skills.forEach((skill, i) => {
             const x = Math.random() * (width - 100) + 50;
-            const y = -Math.random() * 500 - 100;
+            const y = Math.random() * (height - 100) + 50;
 
             const bodyWidth = skill.length * 12 * scale + 30;
             const bodyHeight = 40 * scale;
 
             const body = Bodies.rectangle(x, y, bodyWidth, bodyHeight, {
                 chamfer: { radius: 20 * scale },
-                restitution: 0.5,
-                friction: 0.3,
+                restitution: 0.9, // Bouncy
+                friction: 0,
+                frictionAir: 0.001, // Very low air resistance
                 render: {
                     fillStyle: "#27272a", // Zinc-800
                     strokeStyle: "#3f3f46", // Zinc-700
                     lineWidth: 1,
                 },
                 label: skill
+            });
+
+            // Initial random push
+            Matter.Body.setVelocity(body, {
+                x: (Math.random() - 0.5) * 5,
+                y: (Math.random() - 0.5) * 5
             });
 
             World.add(engine.world, body);

@@ -26,13 +26,15 @@ const generateStars = (count: number, radius: number) => {
     return points;
 };
 
-const StarField = (props: any) => {
-    const ref: any = useRef();
-    const [sphere] = useState(() => generateStars(5000, 1.2));
+const StarLayer = ({ count, radius, speed, size, color }: { count: number, radius: number, speed: number, size: number, color: string }) => {
+    const ref: any = useRef(null);
+    const [sphere] = useState(() => generateStars(count, radius));
 
     useFrame((state, delta) => {
-        ref.current.rotation.x -= delta / 10;
-        ref.current.rotation.y -= delta / 15;
+        if (ref.current) {
+            ref.current.rotation.x -= delta / speed;
+            ref.current.rotation.y -= delta / speed;
+        }
     });
 
     return (
@@ -42,17 +44,28 @@ const StarField = (props: any) => {
                 positions={sphere}
                 stride={3}
                 frustumCulled
-                {...props}
             >
                 <PointMaterial
                     transparent
-                    color="#fff"
-                    size={0.002}
+                    color={color}
+                    size={size}
                     sizeAttenuation={true}
                     depthWrite={false}
                 />
             </Points>
         </group>
+    );
+};
+
+const StarField = () => {
+    return (
+        <>
+            {/* Background Layer: Many small stars, moving slow */}
+            <StarLayer count={3000} radius={1.2} speed={25} size={0.0015} color="#8aa2ea" />
+
+            {/* Foreground Layer: Fewer large stars, moving faster */}
+            <StarLayer count={800} radius={1.0} speed={15} size={0.003} color="#fff" />
+        </>
     );
 };
 

@@ -5,7 +5,10 @@ import { siteConfig } from "@/config/site";
 
 export function Footer() {
     return (
-        <footer className="py-12 border-t border-white/5" id="contact">
+        <footer className="py-12 border-t border-white/10 bg-black/20 backdrop-blur-xl relative overflow-hidden" id="contact">
+            {/* Top Glow Highlight */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-[1px] bg-gradient-to-r from-transparent via-white/30 to-transparent" />
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-2xl h-[40px] bg-transparent shadow-[0_-20px_40px_rgba(255,255,255,0.05)]" />
             <Container>
                 <div className="flex flex-col md:flex-row justify-between items-end gap-10">
 

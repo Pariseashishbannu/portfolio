@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Container } from "@/components/ui/container";
+import { CodeMonument } from "@/components/ui/code-monument";
 import { siteConfig } from "@/config/site";
 import { ArrowRight, Download } from "lucide-react";
 
@@ -66,39 +67,17 @@ export function Hero() {
                         </motion.div>
                     </div>
 
-                    {/* Right: Glass Card Profile / Stats */}
+                    {/* Right: Geometric Monument */}
                     <motion.div
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 1, delay: 0.4 }}
-                        className="flex-1 w-full max-w-md relative"
+                        className="flex-1 w-full max-w-md relative flex justify-center items-center"
                     >
-                        {/* Card Glow */}
-                        <div className="absolute inset-0 bg-accent/20 blur-[100px] rounded-full opacity-50" />
+                        {/* Background Atmosphere Glow */}
+                        <div className="absolute inset-0 bg-accent/20 blur-[80px] rounded-full opacity-20 pointer-events-none" />
 
-                        <div className="relative p-8 rounded-2xl glass-card flex flex-col gap-6">
-                            <div className="flex items-center justify-between border-b border-white/5 pb-6">
-                                <div>
-                                    <p className="text-xs text-secondary uppercase tracking-wider font-mono">Location</p>
-                                    <p className="text-white font-medium">India</p>
-                                </div>
-                                <div className="text-right">
-                                    <p className="text-xs text-secondary uppercase tracking-wider font-mono">Experience</p>
-                                    <p className="text-white font-medium">2+ Years</p>
-                                </div>
-                            </div>
-
-                            <div className="space-y-4">
-                                <p className="text-xs text-secondary uppercase tracking-wider font-mono">Expertise</p>
-                                <div className="flex flex-wrap gap-2">
-                                    {["React", "Next.js", "TypeScript", "Node.js"].map(tech => (
-                                        <span key={tech} className="px-3 py-1 rounded-md bg-white/5 text-sm text-white/80 border border-white/5 font-mono">
-                                            {tech}
-                                        </span>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
+                        <CodeMonument />
                     </motion.div>
                 </div>
             </Container>

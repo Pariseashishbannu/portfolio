@@ -22,6 +22,7 @@ export const metadata: Metadata = {
 
 import { Navbar } from "@/components/layout/navbar";
 import { SpaceBackground } from "@/components/ui/space-background";
+import { SecretPortal } from "@/components/ui/secret-portal";
 
 export default function RootLayout({
   children,
@@ -50,6 +51,7 @@ export default function RootLayout({
           />
         </div>
 
+        <SecretPortal />
         <Navbar />
         {children}
       </body>

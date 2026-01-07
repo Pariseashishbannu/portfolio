@@ -43,14 +43,16 @@ export function Navbar() {
                             ))}
                         </nav>
 
-                        {/* Action - Simple Text Link */}
-                        <a
-                            href={siteConfig.links.resume}
-                            target="_blank"
-                            className="text-sm font-medium text-white/60 hover:text-white transition-colors"
-                        >
-                            Resume
-                        </a>
+                        <div className="flex items-center gap-6">
+                            {/* Action - Simple Text Link */}
+                            <a
+                                href={siteConfig.links.resume}
+                                target="_blank"
+                                className="text-sm font-medium text-white/60 hover:text-white transition-colors"
+                            >
+                                Resume
+                            </a>
+                        </div>
                     </div>
                 </div>
             </Container>

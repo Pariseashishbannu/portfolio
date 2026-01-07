@@ -1,0 +1,15 @@
+services:
+  portfolio:
+    build: .
+    container_name: portfolio
+    restart: always # Ensures it runs 24/7 and restarts on crash/reboot
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+    networks:
+      - web
+
+networks:
+  web:
+    driver: bridge

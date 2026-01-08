@@ -60,11 +60,11 @@ const StarLayer = ({ count, radius, speed, size, color }: { count: number, radiu
 const StarField = () => {
     return (
         <>
-            {/* Background Layer: Many small stars, moving slow */}
-            <StarLayer count={3000} radius={1.2} speed={25} size={0.0015} color="#8aa2ea" />
+            {/* Background Layer: Reduced count for performance */}
+            <StarLayer count={1000} radius={1.2} speed={25} size={0.0015} color="#8aa2ea" />
 
-            {/* Foreground Layer: Fewer large stars, moving faster */}
-            <StarLayer count={800} radius={1.0} speed={15} size={0.003} color="#fff" />
+            {/* Foreground Layer: Reduced count for performance */}
+            <StarLayer count={500} radius={1.0} speed={15} size={0.003} color="#fff" />
         </>
     );
 };
@@ -86,7 +86,11 @@ export function SpaceBackground() {
 
             {/* 2. Interactive Starfield Layer */}
             <div className="absolute inset-0 z-[20]">
-                <Canvas camera={{ position: [0, 0, 1] }}>
+                <Canvas
+                    camera={{ position: [0, 0, 1] }}
+                    dpr={[1, 1.5]} // Cap pixel ratio for performance
+                    gl={{ antialias: false }} // Disable antialiasing for performance
+                >
                     <Suspense fallback={null}>
                         <StarField />
                     </Suspense>

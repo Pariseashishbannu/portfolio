@@ -16,7 +16,7 @@ export function FloatingShapes() {
                 transition={{
                     duration: 15,
                     repeat: Infinity,
-                    ease: "easeInOut"
+                    ease: "easeInOut" as const
                 }}
                 className="absolute -top-[10%] -left-[10%] w-[50vw] h-[50vw] rounded-full bg-purple-900/20 blur-[120px] will-change-transform"
             />
@@ -32,7 +32,7 @@ export function FloatingShapes() {
                 transition={{
                     duration: 18,
                     repeat: Infinity,
-                    ease: "easeInOut"
+                    ease: "easeInOut" as const
                 }}
                 className="absolute -bottom-[20%] -right-[10%] w-[60vw] h-[60vw] rounded-full bg-cyan-900/20 blur-[140px] will-change-transform"
             />
@@ -47,7 +47,7 @@ export function FloatingShapes() {
                 transition={{
                     duration: 20,
                     repeat: Infinity,
-                    ease: "easeInOut"
+                    ease: "easeInOut" as const
                 }}
                 className="absolute top-[30%] left-[20%] w-[30vw] h-[30vw] rounded-full bg-fuchsia-900/10 blur-[100px] will-change-transform"
             />

@@ -52,15 +52,15 @@ export function TechConstellation() {
         y: {
             duration: ANIMATION_DURATION_Y,
             repeat: Infinity,
-            repeatType: "reverse",
-            ease: "easeInOut",
+            repeatType: "reverse" as const,
+            ease: "easeInOut" as const,
             delay: delay
         },
         x: {
             duration: ANIMATION_DURATION_X,
             repeat: Infinity,
-            repeatType: "reverse",
-            ease: "easeInOut",
+            repeatType: "reverse" as const,
+            ease: "easeInOut" as const,
             delay: delay
         }
     });

@@ -2,9 +2,14 @@
 
 import { motion } from "framer-motion";
 import { Container } from "@/components/ui/container";
-import { TechConstellation } from "@/components/ui/tech-constellation";
 import { siteConfig } from "@/config/site";
 import { ArrowRight, Download, Sparkles } from "lucide-react";
+import dynamic from "next/dynamic";
+
+const TechConstellation = dynamic(() => import("@/components/ui/tech-constellation").then(mod => mod.TechConstellation), {
+    ssr: false,
+    loading: () => <div className="w-[600px] h-[600px] animate-pulse bg-white/5 rounded-full" />
+});
 
 export function Hero() {
     return (

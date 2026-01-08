@@ -2,9 +2,9 @@
 
 import { motion } from "framer-motion";
 import { Container } from "@/components/ui/container";
-import { CodeMonument } from "@/components/ui/code-monument";
+import { TechConstellation } from "@/components/ui/tech-constellation";
 import { siteConfig } from "@/config/site";
-import { ArrowRight, Download } from "lucide-react";
+import { ArrowRight, Download, Sparkles } from "lucide-react";
 
 export function Hero() {
     return (
@@ -12,27 +12,37 @@ export function Hero() {
             <Container>
                 <div className="flex flex-col md:flex-row items-center justify-between gap-12">
 
-                    {/* Left: Text Content (Resume Intro) */}
-                    <div className="flex-1 flex flex-col gap-6 z-10">
+                    {/* Left: Text Content */}
+                    <div className="flex-1 flex flex-col gap-8 z-10">
+
+                        {/* Badges */}
                         <motion.div
-                            initial={{ opacity: 0, x: -20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.8 }}
-                            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 w-fit backdrop-blur-sm"
+                            initial={{ opacity: 0, y: -20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5 }}
+                            className="flex flex-wrap gap-4"
                         >
-                            <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse shadow-[0_0_10px_#22c55e]" />
-                            <span className="text-secondary text-xs font-mono tracking-wider">AVAILABLE FOR WORK</span>
+                            <Badge text="Fullstack Developer" />
+                            <Badge text="Tech Innovator" />
+                            <Badge text="Team Lead" />
                         </motion.div>
 
-                        <div className="flex flex-col">
-                            <motion.h1
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.8, delay: 0.2 }}
-                                className="text-5xl md:text-7xl font-display font-bold text-white tracking-tight leading-[1.1] text-glow"
+                        <div className="flex flex-col gap-2">
+                            <motion.h2
+                                initial={{ opacity: 0, x: -20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ duration: 0.5, delay: 0.2 }}
+                                className="text-4xl md:text-5xl font-bold text-white tracking-tight"
                             >
-                                Building the <br />
-                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-cyan-400">future web.</span>
+                                Hi, I'm <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400">Parise Ashish</span>
+                            </motion.h2>
+                            <motion.h1
+                                initial={{ opacity: 0, x: -20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ duration: 0.5, delay: 0.3 }}
+                                className="text-4xl md:text-5xl font-bold text-white tracking-tight"
+                            >
+                                Software Engineer
                             </motion.h1>
                         </div>
 
@@ -40,47 +50,53 @@ export function Hero() {
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ duration: 0.8, delay: 0.4 }}
-                            className="text-lg md:text-xl text-secondary max-w-lg leading-relaxed font-light"
+                            className="text-lg md:text-xl text-gray-400 max-w-lg leading-relaxed font-light"
                         >
-                            I am <span className="text-white font-medium">{siteConfig.name}</span>, a {siteConfig.title} focused on crafting tangible, distinct, and accessible digital experiences.
+                            I build accessible, pixel-perfect, performant web experiences. Focused on building scalable web applications with React, Django, and Modern Technologies.
                         </motion.p>
 
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.6 }}
-                            className="flex flex-wrap gap-4 mt-4"
+                            className="flex flex-wrap gap-4"
                         >
-                            <a
-                                href="#work"
-                                className="px-8 py-3 rounded-full bg-white text-background font-medium hover:scale-105 transition-transform flex items-center gap-2"
-                            >
-                                View Work <ArrowRight className="w-4 h-4" />
-                            </a>
                             <a
                                 href={siteConfig.links.resume}
                                 target="_blank"
-                                className="px-8 py-3 rounded-full bg-white/5 text-white border border-white/10 font-medium hover:bg-white/10 transition-colors flex items-center gap-2"
+                                className="px-8 py-3 rounded-xl bg-[#2a1d50] text-purple-100 border border-purple-500/30 font-medium hover:bg-purple-900/50 transition-all shadow-[0_0_20px_-5px_#7c3aed]"
                             >
-                                Download Resume <Download className="w-4 h-4" />
+                                Resume
+                            </a>
+                            <a
+                                href="#projects"
+                                className="px-8 py-3 rounded-xl bg-white/5 text-white border border-white/10 font-medium hover:bg-white/10 transition-colors"
+                            >
+                                My Projects
                             </a>
                         </motion.div>
                     </div>
 
-                    {/* Right: Geometric Monument */}
+                    {/* Right: Tech Constellation */}
                     <motion.div
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 1, delay: 0.4 }}
-                        className="flex-1 w-full max-w-md relative flex justify-center items-center"
+                        className="flex-1 w-full max-w-[600px] relative flex justify-center items-center"
                     >
-                        {/* Background Atmosphere Glow */}
-                        <div className="absolute inset-0 bg-accent/20 blur-[80px] rounded-full opacity-20 pointer-events-none" />
-
-                        <CodeMonument />
+                        <TechConstellation />
                     </motion.div>
                 </div>
             </Container>
         </section>
+    );
+}
+
+function Badge({ text }: { text: string }) {
+    return (
+        <div className="px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md flex items-center gap-2">
+            <Sparkles className="w-3 h-3 text-purple-400" />
+            <span className="text-sm font-medium text-gray-300">{text}</span>
+        </div>
     );
 }

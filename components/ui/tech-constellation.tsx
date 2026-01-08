@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, Transition, ValueTransition } from "framer-motion";
 import Image from "next/image";
 
 // Configuration for icons
@@ -48,19 +48,20 @@ const FLOAT_X_RANGE = [0, 4, 0];
 export function TechConstellation() {
 
     // Helper to get consistent transition props
-    const getTransition = (delay: number) => ({
+    // Helper to get consistent transition props
+    const getTransition = (delay: number): { x: ValueTransition; y: ValueTransition } => ({
         y: {
             duration: ANIMATION_DURATION_Y,
             repeat: Infinity,
-            repeatType: "reverse" as const,
-            ease: "easeInOut" as const,
+            repeatType: "reverse",
+            ease: "easeInOut",
             delay: delay
         },
         x: {
             duration: ANIMATION_DURATION_X,
             repeat: Infinity,
-            repeatType: "reverse" as const,
-            ease: "easeInOut" as const,
+            repeatType: "reverse",
+            ease: "easeInOut",
             delay: delay
         }
     });
@@ -161,7 +162,21 @@ export function TechConstellation() {
     );
 }
 
-function FloatingCard({ icon, transition, floatX, floatY }: { icon: any, transition: any, floatX: number[], floatY: number[] }) {
+interface IconData {
+    id: string;
+    name: string;
+    src: string;
+    x: number;
+    y: number;
+    delay: number;
+}
+
+function FloatingCard({ icon, transition, floatX, floatY }: {
+    icon: IconData,
+    transition: { x: ValueTransition; y: ValueTransition },
+    floatX: number[],
+    floatY: number[]
+}) {
     return (
         <motion.div
             initial={{ opacity: 0, scale: 0 }}

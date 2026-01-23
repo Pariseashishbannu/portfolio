@@ -1,14 +1,35 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Container } from "@/components/ui/container";
 import { Section } from "@/components/ui/section";
 import { Text } from "@/components/ui/text";
-import { projects } from "@/config/projects";
+import { ProjectItem, projects as projectsFallback } from "@/config/projects";
+import { api } from "@/lib/services";
 import { ArrowUpRight } from "lucide-react";
 
 export function Projects() {
+    const [projectsData, setProjectsData] = useState<ProjectItem[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchProjects = async () => {
+            try {
+                const data = await api.portfolio.getProjects();
+                setProjectsData(data);
+            } catch (error) {
+                console.error("Failed to fetch projects, using fallback:", error);
+                setProjectsData(projectsFallback);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchProjects();
+    }, []);
+
     return (
         <Section id="work" className="py-32">
             <Container>
@@ -18,8 +39,13 @@ export function Projects() {
                     </Text>
                 </a>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {projects.map((project, index) => (
+                {loading ? (
+                    // Skeleton Loading State
+                    Array.from({ length: 3 }).map((_, i) => (
+                        <div key={i} className="min-h-[300px] rounded-3xl bg-white/5 animate-pulse" />
+                    ))
+                ) : (
+                    projectsData.map((project, index) => (
                         <motion.a
                             key={index}
                             href={project.link}
@@ -58,8 +84,8 @@ export function Projects() {
                                 ))}
                             </div>
                         </motion.a>
-                    ))}
-                </div>
+                    ))
+                )}
             </Container>
         </Section>
     );
